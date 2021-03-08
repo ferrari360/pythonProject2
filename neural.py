@@ -39,6 +39,26 @@
 # pred = neural_network(input,weights)
 # print(pred)
 
+# def elementwise_multiplication(vec_a, vec_b,vec_c):
+#     assert (len(vec_a) == len(vec_b))
+#     for i in range(len(vec_a)):
+#          vec_c[i]=vec_a[i]*vec_b[i]
+#     return vec_c
+# vec_a = [1,3,4]
+# vec_b = [3,4,6]
+# vec_c = [0,0,0]
+#
+# print(elementwise_multiplication(vec_a, vec_b, vec_c))
+#
+#
+# def vector_sum(vec_a):
+#     sum = 0
+#     for i in range(len(vec_a)):
+#         sum+=vec_a[i]
+#     return sum
+# print(vector_average(vec_c))
+
+
 # import numpy as np
 # weights = np.array([0.1, 0.2, 0])
 # def neural_network(input, weights):
@@ -107,19 +127,54 @@
 # e = np.random.rand(2,5)
 # print(a*0.1)
 # print(c*0.2)
-# print(a*b)
-# print(a*b*0.2)
-# print(a*c)
+# print('a*b',a*b)
+# print('a*b*0,2',a*b*0.2)
+# print('a*c',a*c)
 #
 # import numpy as np
 # a = np.zeros((4,1)).T
+# print('a',a)
 # b = np.zeros((4,3))
+# print('b',b)
+#
 #
 # c = a.dot(b)
 # print(c.shape)
-
+#
 # import numpy as np
 # a = np.array([1,2,3,4,5]).T
 # b = np.array([1,4,5,6,7]).T
 # c = a.dot(b)
 # print(c)
+
+# knob_weight = 0.5
+# input = 0.5
+# goal_pred = 0.8
+#
+# pred = input*knob_weight
+# error = (pred-goal_pred)**2
+# print(error)
+
+weight = 0.5
+input = 0.5
+goal_prediction = 0.8
+
+step_amount = 0.1
+
+for iteration in range(1101):
+    prediction = input * weight
+    error = (prediction - goal_prediction) ** 2
+
+    print("Error: " + str(error) + " Prediction: " + str(prediction))
+
+    up_prediction = input*(weight + step_amount)
+    up_error = (goal_prediction - up_prediction) ** 2
+
+    down_prediction = input*(weight - step_amount)
+    down_error = (goal_prediction - down_prediction) ** 2
+
+
+    if down_error < up_error:
+        weight -= step_amount
+    if down_error > up_error:
+        weight += step_amount
